@@ -8,6 +8,12 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
+
+    @media screen and (max-width: 560px) {
+        .darkmode-switch{
+            display: none;
+        }
+    }
 `;
 
 export const NavBar = () => {

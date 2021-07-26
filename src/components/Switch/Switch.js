@@ -13,6 +13,7 @@ export default function Switches() {
 
   return (
       <Switch
+        className="darkmode-switch"
         checked={state.checkedA}
         onChange={handleChange}
         name="checkedA"
