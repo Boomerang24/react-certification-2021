@@ -18,15 +18,13 @@ const Container = styled.div`
 
 export const NavBar = () => {
     return (
-        <>
-            <Nav>
-                <Menu />
-                <SearchBar />
-                <Container >
-                    <StyledSwitch />
-                    <Logon />
-                </Container>
-            </Nav>
-        </>
+        <Nav data-testid="navbar-container">
+            <Menu />
+            <SearchBar />
+            <Container >
+                <StyledSwitch />
+                <Logon />
+            </Container>
+        </Nav>
     )
 }
