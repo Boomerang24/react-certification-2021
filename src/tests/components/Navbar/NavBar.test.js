@@ -7,8 +7,8 @@ describe('Test for Navbar', () => {
         
         render(
             <NavBar />
-        )
+        );
 
         expect(screen.getByTestId('navbar-container')).toBeInTheDocument();
     });
-})
+});

@@ -7,8 +7,8 @@ describe('Test for Grid', () => {
         
         render(
             <Grid />
-        )
+        );
 
         expect(screen.getAllByAltText("SoyUnaImagen").length).toBe(25);
     });
-})
+});
