@@ -8,6 +8,6 @@ export function VideosProvider({children}){
 
     const[busqueda, setBusqueda] = useState('Wizeline');
 
-    let videosList = useFetchVideos(busqueda) || [];
+    let videosList = useFetchVideos(busqueda);
     return <VideosContext.Provider value={{videosList, setBusqueda}}>{children}</VideosContext.Provider>;
 }

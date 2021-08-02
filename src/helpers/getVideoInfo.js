@@ -1,8 +1,8 @@
-const apikey = `AIzaSyCW3SHBJTC-iYeBDCTBxW2JCQYyZvb3bbk`;
+const apikey = process.env.REACT_APP_YOUTUBE_APIKEY;
 
 export const getVideoInfo = async ( videoID ) => {
 
-    const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${apikey}&maxResults=15&type=video`;
+    const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${apikey}&maxResults=30&type=video`;
     const resp = await fetch (url);
     const {items} = await resp.json();
 

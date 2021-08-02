@@ -4,7 +4,7 @@ import { GridItem } from '../Grid/GridItem';
 // import { data } from '../../mock/mockedUTube';
 import {useFetchRelated} from '../hooks/useFetchRelated'
 import {useVideoInfo} from '../hooks/useVideoInfo'
-import { StyledPlayer, StyledVideo } from './PlayerGrid.styles';
+import { StyledPlayer, StyledPlayerGrid, StyledRelatedVideos, StyledVideo, StyledVideoInfo } from './PlayerGrid.styles';
 
 export const PlayerGrid = () => {
 
@@ -14,22 +14,21 @@ export const PlayerGrid = () => {
     const videoInfo = useVideoInfo(videoID);
 
     return (
-        <>
+        <StyledPlayerGrid>
             <StyledPlayer>
-                <StyledVideo src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player"></StyledVideo>
+                <StyledVideo role="iframe" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player"></StyledVideo>
                 {
                     videoInfo.map(({publishedAt, channelTitle, title, description}) => {
-                        console.log(description);
-                        return <div key={publishedAt}>
-                            <h1>{channelTitle}</h1>
-                            <p>{title}</p>
-                            <p>{description}</p>
-                        </div>
+                        return <StyledVideoInfo key={publishedAt}>
+                            <h1>{title}</h1>
+                            <h4>{channelTitle}</h4>
+                            <h6>{description}</h6>
+                        </StyledVideoInfo>
                         
                     })
                 }
             </StyledPlayer>
-            <div>
+            <StyledRelatedVideos>
                 {
                     relatedVideos.map(({publishedAt, title, thumbnail, channelTitle, videoID}) => {
                         return <GridItem 
@@ -41,7 +40,7 @@ export const PlayerGrid = () => {
                         />
                     })
                 }            
-            </div>
-        </>
+            </StyledRelatedVideos>
+        </StyledPlayerGrid>
     )
 }
