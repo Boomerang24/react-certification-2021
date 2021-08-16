@@ -1,24 +1,20 @@
-const apikey = process.env.REACT_APP_YOUTUBE_APIKEY;
+import { apikey, baseUrl } from "../envVariables";
 
 export const getVideoInfo = async ( videoID ) => {
 
-    const url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${apikey}&maxResults=30&type=video`;
+    const url = `${baseUrl}videos?part=snippet&id=${videoID}&key=${apikey}&maxResults=30&type=video`;
     const resp = await fetch (url);
     const {items} = await resp.json();
 
     //Lists videos with the SNIPPET Property
-    const filterVideos = items.filter(item => item.snippet);
+    const {snippet, id} = items.filter(item => item.snippet)[0];
 
-    const videoInfo = filterVideos.map( ({snippet, id}) => {
-
-        return {
+    const videoInfo =  {
             publishedAt: snippet.publishedAt,
             channelTitle: snippet.channelTitle,
             title: snippet.localized.title,
             description: snippet.localized.description,
             videoID: id.videoId,
-        }
-    })
-
+    }
     return videoInfo;
 };

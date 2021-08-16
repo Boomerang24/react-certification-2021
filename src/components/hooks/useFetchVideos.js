@@ -1,20 +1,17 @@
-
 import {useEffect, useState} from 'react';
 import {getVideos} from '../../helpers/getVideos'
 
 export const useFetchVideos = ( search ) => {
 
-    const [state, setState] = useState([]);
+    const [fetch, setFetch] = useState([]);
 
     useEffect( () => {
 
         getVideos( search )
             .then( vids => {
-                setState([...vids]);
+                setFetch([...vids]);
             })
     }, [search]);
 
-    // console.log(state);
-
-    return state;
+    return fetch;
 }

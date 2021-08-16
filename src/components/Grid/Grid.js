@@ -6,16 +6,13 @@ import { VideosContext } from '../providers/VideosProvider';
 
 export const Grid = () => {
 
-    const {videosList} = useContext(VideosContext);
+    const {videosList, globalState} = useContext(VideosContext);
 
     return (
-//         <iframe id="ytplayer" type="text/html" width="640" height="360"
-//   src='http://www.youtube.com/embed/udKE1ksKWDE'
-//   frameBorder="0"/>
-        <StyledGrid>
+        <StyledGrid theme={globalState.theme}>
             {
                 videosList.map(({publishedAt, title, thumbnail, channelTitle, videoID}) => {
-                    return <GridItem 
+                    return <GridItem
                         key={publishedAt}
                         title={title}
                         thumbnail={thumbnail}

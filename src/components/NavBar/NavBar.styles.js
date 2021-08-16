@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { FaBars } from 'react-icons/fa'
 import { MdFace } from "react-icons/md";
+import { RiSearchLine } from "react-icons/ri";
 
 export const Nav = styled.nav`
 
@@ -39,6 +40,12 @@ export const Menu = styled(FaBars)`
     } */
 `;
 
+export const SearchNav = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+`;
+
 export const SearchBar = styled.input`
         
     border: inset;
@@ -54,13 +61,44 @@ export const SearchBar = styled.input`
     /* padding: 0.3rem; */
     padding: 7px 25px;
     outline: none;
-    width: 280px;
+    width: 215px;
 
     &:hover, &:focus{
         color: whitesmoke;
         transition: all 0.2s ease-in-out;
     }
 
+    @media screen and (max-width: 560px) {
+        width: 150px;
+        font-size: 15px;
+    }
+
+`;
+
+export const SearchButton = styled(RiSearchLine)`
+
+    border: none;
+    border-radius: 37px;
+    border-style: hidden;
+    background: #256ce1;
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: auto;
+    outline: none;
+    padding: 7px 20px;
+    transition: all 0.4s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: #fff;
+        color: #010606;
+    }
+
+    @media screen and (max-width: 560px) {
+        display: none;
+    }
 `;
 
 export const Logon = styled(MdFace)`
@@ -84,7 +122,9 @@ export const Logon = styled(MdFace)`
         color: #010606;
     }
 
-    /* @media screen and (max-width: 560px) {
-        display: none;
-    } */
+    @media screen and (max-width: 560px) {
+        margin-right: 10px;
+        font-size: 1.4rem;        
+        padding: 7px 17px;
+    }
 `;

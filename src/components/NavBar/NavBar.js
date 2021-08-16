@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { StyledSwitch } from '../Switch/Switch.styles'
-import { Nav, Menu, SearchBar, Logon } from './NavBar.styles'
+import { Nav, Menu, SearchBar, Logon, SearchButton, SearchNav } from './NavBar.styles'
 import styled from 'styled-components'
 import { VideosContext } from '../providers/VideosProvider';
 import { useHistory } from 'react-router-dom';
@@ -40,13 +40,17 @@ export const NavBar = () => {
     return (
         <Nav data-testid="navbar-container">
             <Menu />
-            <form type="submit" onSubmit={handleSubmitChange}>
-                <SearchBar 
-                    type="text"
-                    value={inputValue}
-                    onChange={handleInputeChange}
-                />
-            </form>
+            <SearchNav>
+                <form type="submit" onSubmit={handleSubmitChange}>
+                    <SearchBar 
+                        type="text"
+                        placeholder="Enter your video name"
+                        value={inputValue}
+                        onChange={handleInputeChange}
+                    />
+                </form>
+                <SearchButton onClick={handleSubmitChange}/>
+            </SearchNav>
             <Container >
                 <StyledSwitch />
                 <Logon />
