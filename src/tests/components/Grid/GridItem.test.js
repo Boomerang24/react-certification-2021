@@ -11,10 +11,10 @@ describe('Test for GridItem', () => {
                 thumbnail="SoyUnURL"
                 channelTitle="Renders Perros"
             />
-        )
+        );
 
         expect(screen.getByAltText("SoyUnaImagen")).toBeInTheDocument();
         expect(screen.getByText("Renders Perros")).toBeInTheDocument();
         expect(screen.getByRole("img").getAttribute('src')).toBe("SoyUnURL");
     });
-})
+});

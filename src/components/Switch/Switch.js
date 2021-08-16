@@ -3,8 +3,8 @@ import Switch from '@material-ui/core/Switch';
 
 export default function Switches() {
   const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
+    lightTheme: true,
+    darkTheme: true,
   });
 
   const handleChange = (event) => {
@@ -14,9 +14,9 @@ export default function Switches() {
   return (
       <Switch
         className="darkmode-switch"
-        checked={state.checkedA}
+        checked={state.lightTheme}
         onChange={handleChange}
-        name="checkedA"
+        name="lightTheme"
         inputProps={{ 'aria-label': 'secondary checkbox' }}
       />
   );
