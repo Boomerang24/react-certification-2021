@@ -1,60 +1,67 @@
-import React, { useState, useContext } from 'react'
-import { StyledSwitch } from '../Switch/Switch.styles'
-import { Nav, Menu, SearchBar, Logon, SearchButton, SearchNav } from './NavBar.styles'
-import styled from 'styled-components'
-import { VideosContext } from '../providers/VideosProvider';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { StyledSwitch } from "../Switch/Switch.styles";
+import {
+  Nav,
+  Menu,
+  SearchBar,
+  Logon,
+  SearchButton,
+  SearchNav,
+} from "./NavBar.styles";
+import styled from "styled-components";
+import { VideosContext } from "../providers/VideosProvider";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-
-    @media screen and (max-width: 560px) {
-        .darkmode-switch{
-            display: none;
-        }
+  @media screen and (max-width: 560px) {
+    .darkmode-switch {
+      display: none;
     }
-    `;
+  }
+`;
 
 export const NavBar = () => {
-    
-    const {setBusqueda} = useContext(VideosContext);
-    const [inputValue, setInputvalue] = useState('');
+  const { setBusqueda } = useContext(VideosContext);
+  const [inputValue, setInputvalue] = useState("");
 
-    const history = useHistory();
+  const history = useHistory();
 
+  const handleInputeChange = (e) => {
+    setInputvalue(e.target.value);
+  };
 
-    const handleInputeChange = ( e ) => {
-        setInputvalue(e.target.value);
-    }
+  const handleSubmitChange = (e) => {
+    e.preventDefault();
+    setBusqueda(inputValue);
+    history.push("/");
+  };
 
-    const handleSubmitChange = ( e ) => {
-        e.preventDefault();
-        setBusqueda(inputValue);
-        history.push("/");
-    }
-
-
-    return (
-        <Nav data-testid="navbar-container">
-            <Menu />
-            <SearchNav>
-                <form type="submit" onSubmit={handleSubmitChange}>
-                    <SearchBar 
-                        type="text"
-                        placeholder="Enter your video name"
-                        value={inputValue}
-                        onChange={handleInputeChange}
-                    />
-                </form>
-                <SearchButton onClick={handleSubmitChange}/>
-            </SearchNav>
-            <Container >
-                <StyledSwitch />
-                <Logon />
-            </Container>
-        </Nav>
-    )
+  return (
+    <Nav data-testid="navbar-container">
+      <Menu data-testid="navbar-menu" />
+      <SearchNav>
+        <form type="submit" onSubmit={handleSubmitChange}>
+          <SearchBar
+            type="text"
+            placeholder="Enter your video name"
+            value={inputValue}
+            onChange={handleInputeChange}
+            data-testid="search-field"
+          />
+        </form>
+        <SearchButton
+          onClick={handleSubmitChange}
+          data-testid="search-button"
+        />
+      </SearchNav>
+      <Container>
+        <StyledSwitch />
+        <Logon data-testid="logon-button" />
+      </Container>
+    </Nav>
+  );
 };
