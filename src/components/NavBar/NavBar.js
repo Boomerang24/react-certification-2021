@@ -1,16 +1,10 @@
 import React, { useState, useContext } from "react";
 import { StyledSwitch } from "../Switch/Switch.styles";
-import {
-  Nav,
-  Menu,
-  SearchBar,
-  Logon,
-  SearchButton,
-  SearchNav,
-} from "./NavBar.styles";
+import { Nav, Menu, SearchBar, SearchButton, SearchNav } from "./NavBar.styles";
 import styled from "styled-components";
 import { VideosContext } from "../providers/VideosProvider";
 import { useHistory } from "react-router-dom";
+import AuthenticationButton from "../AuthButton/authentication-button";
 
 const Container = styled.div`
   display: flex;
@@ -60,7 +54,7 @@ export const NavBar = () => {
       </SearchNav>
       <Container>
         <StyledSwitch />
-        <Logon data-testid="logon-button" />
+        <AuthenticationButton data-testid="logon-button"></AuthenticationButton>
       </Container>
     </Nav>
   );

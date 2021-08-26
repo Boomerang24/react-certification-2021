@@ -1,17 +1,26 @@
-import {useEffect, useState} from 'react';
-import {getVideos} from '../../helpers/getVideos'
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getVideos } from "../../helpers/getVideos";
+import { VideosContext } from "../providers/VideosProvider";
 
-export const useFetchVideos = ( search ) => {
+export const useFetchVideos = (search) => {
+  const { pathname } = useLocation();
+  const parentRoute = pathname.split("/", 2)[1];
 
-    const [fetch, setFetch] = useState([]);
+  const [fetch, setFetch] = useState([]);
 
-    useEffect( () => {
+  const { favVideos } = useContext(VideosContext).globalState;
+  console.log(favVideos);
 
-        getVideos( search )
-            .then( vids => {
-                setFetch([...vids]);
-            })
-    }, [search]);
+  useEffect(() => {
+    if (parentRoute === "favorite") {
+      setFetch([...favVideos]);
+    } else {
+      getVideos(search).then((vids) => {
+        setFetch([...vids]);
+      });
+    }
+  }, [parentRoute, favVideos, search]);
 
-    return fetch;
-}
+  return fetch;
+};
