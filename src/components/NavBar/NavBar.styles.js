@@ -9,6 +9,7 @@ export const Nav = styled.nav`
   height: 55px;
   display: flex;
   padding: 0.1rem;
+  width: 100%;
   z-index: 10;
   justify-content: space-between;
 
@@ -21,7 +22,7 @@ export const Menu = styled(FaBars)`
   color: white;
   font-size: large;
   height: 25px;
-  padding: 0.9rem;
+  padding: 0.5rem;
   width: 25px;
 
   &:hover {

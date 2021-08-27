@@ -9,6 +9,7 @@ const LoginButton = () => {
   return (
     <StyledButton
       className="btn btn-primary btn-block"
+      data-testid="logon-button"
       onClick={() => loginWithPopup()}
     >
       <MdFace />

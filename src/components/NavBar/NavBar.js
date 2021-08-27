@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 import { StyledSwitch } from "../Switch/Switch.styles";
-import { Nav, Menu, SearchBar, SearchButton, SearchNav } from "./NavBar.styles";
+import { Nav, SearchBar, SearchButton, SearchNav } from "./NavBar.styles";
 import styled from "styled-components";
 import { VideosContext } from "../providers/VideosProvider";
 import { useHistory } from "react-router-dom";
 import AuthenticationButton from "../AuthButton/authentication-button";
+import TemporaryDrawer from "../Sidebar/SideMenu";
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ export const NavBar = () => {
 
   return (
     <Nav data-testid="navbar-container">
-      <Menu data-testid="navbar-menu" />
+      <TemporaryDrawer />
       <SearchNav>
         <form type="submit" onSubmit={handleSubmitChange}>
           <SearchBar
@@ -54,7 +55,7 @@ export const NavBar = () => {
       </SearchNav>
       <Container>
         <StyledSwitch />
-        <AuthenticationButton data-testid="logon-button"></AuthenticationButton>
+        <AuthenticationButton></AuthenticationButton>
       </Container>
     </Nav>
   );

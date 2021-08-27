@@ -11,15 +11,7 @@ describe("Test for Grid", () => {
       <BrowserRouter>
         <VideosContext.Provider
           value={{
-            videosList: [
-              {
-                publishedAt: "hoy",
-                title: "Dross",
-                thumbnail: "SoyUnPreview",
-                channelTitle: "Magnates",
-                videoID: "s7d8f7s",
-              },
-            ],
+            videosList: videosMock,
             globalState: lightTheme,
           }}
         >
@@ -29,6 +21,7 @@ describe("Test for Grid", () => {
     );
 
     expect(screen.getAllByAltText("videoPreview").length).toBe(1);
+    expect(screen.getByAltText(videosMock[0].title)).toBeInTheDocument("Dross");
   });
 
   test("should render home view with multiple videos", () => {

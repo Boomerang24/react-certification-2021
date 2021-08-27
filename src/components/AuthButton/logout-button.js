@@ -8,6 +8,7 @@ const LogoutButton = () => {
   return (
     <StyledButton
       className="btn btn-danger btn-block"
+      data-testid="logout-button"
       onClick={() =>
         logout({
           // cierra la sesion y regresa a la pagina principal
