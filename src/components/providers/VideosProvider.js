@@ -1,13 +1,27 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useReducer, useState } from "react";
 // import {data} from '../../mock/mockedUTube'
-import { useFetchVideos } from '../hooks/useFetchVideos';
+import { reducer } from "../../helpers/reducer";
+import { lightTheme } from "../../ThemeStyles";
+import { storage } from "./storage";
+
+const favVideos = storage.get("favList") || [];
 
 export const VideosContext = createContext();
 
-export function VideosProvider({children}){
+export function VideosProvider({ children }) {
+  const [globalState, dispatch] = useReducer(reducer, {
+    theme: lightTheme,
+    // Stored videos received
+    favVideos,
+  });
 
-    const[busqueda, setBusqueda] = useState('Wizeline');
+  const [busqueda, setBusqueda] = useState("Wizeline");
 
-    let videosList = useFetchVideos(busqueda);
-    return <VideosContext.Provider value={{videosList, setBusqueda}}>{children}</VideosContext.Provider>;
+  return (
+    <VideosContext.Provider
+      value={{ busqueda, setBusqueda, globalState, dispatch }}
+    >
+      {children}
+    </VideosContext.Provider>
+  );
 }

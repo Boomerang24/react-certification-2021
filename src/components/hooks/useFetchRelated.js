@@ -1,20 +1,25 @@
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getRelatedVideos } from "../../helpers/getRelatedVideos";
+import { VideosContext } from "../providers/VideosProvider";
 
-import {useEffect, useState} from 'react';
-import {getRelatedVideos} from '../../helpers/getRelatedVideos'
+export const useFetchRelated = (videoID) => {
+  const { pathname } = useLocation();
+  const parentRoute = pathname.split("/", 2)[1];
 
-export const useFetchRelated = ( videoID ) => {
+  const [relatedvid, setRelatedVid] = useState([]);
 
-    const [state, setState] = useState([]);
+  const { favVideos } = useContext(VideosContext).globalState;
 
-    useEffect( () => {
+  useEffect(() => {
+    if (parentRoute === "video") {
+      getRelatedVideos(videoID).then((vids) => {
+        setRelatedVid([...vids]);
+      });
+    } else {
+      setRelatedVid([...favVideos]);
+    }
+  }, [parentRoute, videoID, favVideos]);
 
-        getRelatedVideos( videoID )
-            .then( vids => {
-                setState([...vids]);
-            })
-    }, [videoID]);
-
-    // console.log(state);
-
-    return state;
-}
+  return relatedvid;
+};

@@ -3,7 +3,9 @@ import styled from 'styled-components'
 export const StyledGridItem = styled.div`
     
     background: transparent;
-    box-shadow: 1px 1px 10px 2px rgba(230,230,230,0.75);
+    border: 1px solid ${props => props.theme.bordercolor};
+    box-shadow: ${props => props.theme.boxshadow};
+    color: ${props => props.theme.fontcolor};
     margin: 15px;
     max-width: 240px;
     border-radius: 7px;

@@ -1,23 +1,28 @@
-import React from 'react';
-import Switch from '@material-ui/core/Switch';
+import React, { useContext, useState } from "react";
+import Switch from "@material-ui/core/Switch";
+import { VideosContext } from "../providers/VideosProvider";
+import { types } from "../../types/types";
+import { lightTheme, darkTheme } from "../../ThemeStyles";
 
 export default function Switches() {
-  const [state, setState] = React.useState({
-    lightTheme: true,
-    darkTheme: true,
-  });
+  const { dispatch } = useContext(VideosContext);
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+  const [switchValue, setSwitchValue] = useState(true);
+
+  const handleSwitchChange = () => {
+    setSwitchValue(!switchValue);
+    const themeOn = switchValue ? darkTheme : lightTheme;
+    dispatch({ type: types.theme, payload: themeOn });
   };
 
   return (
-      <Switch
-        className="darkmode-switch"
-        checked={state.lightTheme}
-        onChange={handleChange}
-        name="lightTheme"
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
-      />
+    <Switch
+      value={switchValue}
+      className="darkmode-switch"
+      name="lightTheme"
+      inputProps={{ "aria-label": "secondary checkbox" }}
+      onClick={handleSwitchChange}
+      data-testid="dark-mode-switch"
+    />
   );
 }
