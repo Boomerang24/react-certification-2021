@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { useContext } from "react";
 import { MdFavoriteBorder } from "react-icons/md";
 import { useParams } from "react-router-dom";
@@ -18,29 +19,35 @@ import {
 export const PlayerGrid = () => {
   const { videoID } = useParams();
 
+  const { isAuthenticated } = useAuth0();
+
   const relatedVideos = useFetchRelated(videoID);
   const { publishedAt, title, thumbnail, channelTitle, description } =
     useVideoInfo(videoID);
-  const { globalState, dispatch } = useContext(VideosContext);
+  const { dispatch } = useContext(VideosContext);
 
   const currentVideo = { publishedAt, title, thumbnail, channelTitle, videoID };
 
   const handleFav = () => {
     dispatch({ type: types.modifyVideos, payload: currentVideo });
+    dispatch({ type: types.modifyLocalStorage });
   };
 
   return (
-    <StyledPlayerGrid theme={globalState.theme}>
-      <StyledPlayer theme={globalState.theme}>
+    <StyledPlayerGrid>
+      <StyledPlayer>
         <StyledVideo
+          allowFullScreen={true}
           role="iframe"
           src={`https://www.youtube.com/embed/${videoID}`}
           title="YouTube video player"
-        ></StyledVideo>
-        <StyledVideoInfo theme={globalState.theme} key={videoID}>
-          <StyledFav onClick={handleFav}>
-            <MdFavoriteBorder />
-          </StyledFav>
+        />
+        <StyledVideoInfo key={videoID}>
+          {isAuthenticated && (
+            <StyledFav onClick={handleFav}>
+              <MdFavoriteBorder />
+            </StyledFav>
+          )}
           <h1>{title}</h1>
           <h4>{channelTitle}</h4>
           <h6>{description}</h6>

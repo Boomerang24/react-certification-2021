@@ -8,7 +8,6 @@ export const Nav = styled.nav`
   box-shadow: 0px 2px red;
   height: 55px;
   display: flex;
-  padding: 0.1rem;
   width: 100%;
   z-index: 10;
   justify-content: space-between;
@@ -76,6 +75,7 @@ export const SearchButton = styled(RiSearchLine)`
   border-radius: 37px;
   border-style: hidden;
   background: #256ce1;
+  /* background: ${(props) => props.theme.background}; */
   color: whitesmoke;
   cursor: pointer;
   font-size: 1.2rem;
@@ -121,6 +121,19 @@ export const StyledButton = styled.button`
     margin-right: 10px;
     font-size: 1.4rem;
     padding: 7px 17px;
+  }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-right: 0.7rem;
+
+  @media screen and (max-width: 560px) {
+    .darkmode-switch {
+      display: none;
+    }
   }
 `;
 

@@ -5,12 +5,13 @@ import { lightTheme } from "../../ThemeStyles";
 import { storage } from "./storage";
 
 const favVideos = storage.get("favList") || [];
+const theme = storage.get("theme") || lightTheme;
 
 export const VideosContext = createContext();
 
 export function VideosProvider({ children }) {
   const [globalState, dispatch] = useReducer(reducer, {
-    theme: lightTheme,
+    theme,
     // Stored videos received
     favVideos,
   });

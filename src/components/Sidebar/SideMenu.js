@@ -1,5 +1,4 @@
-import React from "react";
-import clsx from "clsx";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
@@ -10,23 +9,31 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import { Menu } from "../NavBar/NavBar.styles";
 import { Link } from "react-router-dom";
-import { SidebarData } from "./SidebarData";
-
-const useStyles = makeStyles({
-  list: {
-    width: 200,
-  },
-  fullList: {
-    width: "auto",
-  },
-  paper: {
-    background: "white",
-  },
-});
+import { VideosContext } from "../providers/VideosProvider";
+import { useAuth0 } from "@auth0/auth0-react";
+import { filterRoutes } from "./sidebarData";
 
 const anchor = "left";
 
-export default function TemporaryDrawer() {
+export default function SideMenu() {
+  const { isAuthenticated } = useAuth0();
+
+  const {
+    globalState: { theme },
+  } = useContext(VideosContext);
+
+  const useStyles = makeStyles({
+    list: {
+      width: 200,
+    },
+    fullList: {
+      width: "auto",
+    },
+    paper: {
+      background: theme.body,
+    },
+  });
+
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -45,19 +52,20 @@ export default function TemporaryDrawer() {
 
   const list = (anchor) => (
     <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === "top" || anchor === "bottom",
-      })}
+      // className={classes.list}
+      className={classes.list}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {SidebarData.map((item, index) => {
+        {filterRoutes(isAuthenticated).map((item, index) => {
           return (
-            <Link to={item.path}>
-              <ListItem button key={index}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+            <Link to={item.path} key={index}>
+              <ListItem button key={index} style={{ color: theme.fontcolor }}>
+                <ListItemIcon style={{ color: theme.fontcolor }}>
+                  {item.icon}
+                </ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItem>
             </Link>

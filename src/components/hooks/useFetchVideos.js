@@ -10,7 +10,6 @@ export const useFetchVideos = (search) => {
   const [fetch, setFetch] = useState([]);
 
   const { favVideos } = useContext(VideosContext).globalState;
-  console.log(favVideos);
 
   useEffect(() => {
     if (parentRoute === "favorite") {

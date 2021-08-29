@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     body{
-        //TODO: Fix full body layout
+        height: 100vh;
         background-color: ${(props) => props.theme.body.backgroundColor};
         color: ${(props) => props.theme.color}
     }

@@ -1,23 +1,16 @@
 import React, { useState, useContext } from "react";
 import { StyledSwitch } from "../Switch/Switch.styles";
-import { Nav, SearchBar, SearchButton, SearchNav } from "./NavBar.styles";
-import styled from "styled-components";
+import {
+  Container,
+  Nav,
+  SearchBar,
+  SearchButton,
+  SearchNav,
+} from "./NavBar.styles";
 import { VideosContext } from "../providers/VideosProvider";
 import { useHistory } from "react-router-dom";
-import AuthenticationButton from "../AuthButton/authentication-button";
-import TemporaryDrawer from "../Sidebar/SideMenu";
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-  @media screen and (max-width: 560px) {
-    .darkmode-switch {
-      display: none;
-    }
-  }
-`;
+import AuthenticationButton from "../AuthButton/AuthenticationButton";
+import SideMenu from "../Sidebar/SideMenu";
 
 export const NavBar = () => {
   const { setBusqueda } = useContext(VideosContext);
@@ -37,7 +30,7 @@ export const NavBar = () => {
 
   return (
     <Nav data-testid="navbar-container">
-      <TemporaryDrawer />
+      <SideMenu />
       <SearchNav>
         <form type="submit" onSubmit={handleSubmitChange}>
           <SearchBar

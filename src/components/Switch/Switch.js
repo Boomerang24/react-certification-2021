@@ -3,25 +3,33 @@ import Switch from "@material-ui/core/Switch";
 import { VideosContext } from "../providers/VideosProvider";
 import { types } from "../../types/types";
 import { lightTheme, darkTheme } from "../../ThemeStyles";
+import { BsSun } from "react-icons/bs";
+import { FaMoon } from "react-icons/fa";
 
 export default function Switches() {
-  const { dispatch } = useContext(VideosContext);
+  const { globalState, dispatch } = useContext(VideosContext);
 
-  const [switchValue, setSwitchValue] = useState(true);
+  const initialTheme = globalState.theme.id === "darkTheme";
+  const [switchValue, setSwitchValue] = useState(initialTheme);
 
-  const handleSwitchChange = () => {
-    setSwitchValue(!switchValue);
-    const themeOn = switchValue ? darkTheme : lightTheme;
-    dispatch({ type: types.theme, payload: themeOn });
+  const handleSwitchChange = (e) => {
+    setSwitchValue(e.target.checked);
+    dispatch({
+      type: types.theme,
+      payload: e.target.checked ? darkTheme : lightTheme,
+    });
+    dispatch({ type: types.saveThemeStorage });
   };
 
   return (
     <Switch
-      value={switchValue}
+      onClick={handleSwitchChange}
+      color="default"
+      checked={switchValue}
+      icon={<BsSun />}
+      checkedIcon={<FaMoon />}
       className="darkmode-switch"
       name="lightTheme"
-      inputProps={{ "aria-label": "secondary checkbox" }}
-      onClick={handleSwitchChange}
       data-testid="dark-mode-switch"
     />
   );

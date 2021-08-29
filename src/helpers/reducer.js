@@ -20,11 +20,16 @@ export const reducer = (state, action) => {
       } else {
         updatedVideos = [...state.favVideos, action.payload];
       }
-      storage.set("favList", updatedVideos);
       return {
         ...state,
         favVideos: updatedVideos,
       };
+    case types.modifyLocalStorage:
+      storage.set("favList", state.favVideos);
+      return state;
+    case types.saveThemeStorage:
+      storage.set("theme", state.theme);
+      return state;
     default:
       return state;
   }
