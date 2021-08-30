@@ -30,6 +30,9 @@ export const reducer = (state, action) => {
     case types.saveThemeStorage:
       storage.set("theme", state.theme);
       return state;
+    case types.saveUser:
+      storage.set("credentials", action.payload);
+      return state;
     default:
       return state;
   }

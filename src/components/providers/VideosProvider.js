@@ -6,14 +6,19 @@ import { storage } from "./storage";
 
 const favVideos = storage.get("favList") || [];
 const theme = storage.get("theme") || lightTheme;
+const credentials = storage.get("credentials") || {
+  username: "",
+  password: "",
+  authMock: false,
+};
 
 export const VideosContext = createContext();
 
 export function VideosProvider({ children }) {
   const [globalState, dispatch] = useReducer(reducer, {
     theme,
-    // Stored videos received
     favVideos,
+    credentials,
   });
 
   const [busqueda, setBusqueda] = useState("Wizeline");

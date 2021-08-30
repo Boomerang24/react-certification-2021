@@ -19,7 +19,7 @@ export default function SideMenu() {
   const { isAuthenticated } = useAuth0();
 
   const {
-    globalState: { theme },
+    globalState: { theme, credentials },
   } = useContext(VideosContext);
 
   const useStyles = makeStyles({
@@ -59,18 +59,20 @@ export default function SideMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {filterRoutes(isAuthenticated).map((item, index) => {
-          return (
-            <Link to={item.path} key={index}>
-              <ListItem button key={index} style={{ color: theme.fontcolor }}>
-                <ListItemIcon style={{ color: theme.fontcolor }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.title} />
-              </ListItem>
-            </Link>
-          );
-        })}
+        {filterRoutes(isAuthenticated || credentials.authMock).map(
+          (item, index) => {
+            return (
+              <Link to={item.path} key={index}>
+                <ListItem button key={index} style={{ color: theme.fontcolor }}>
+                  <ListItemIcon style={{ color: theme.fontcolor }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </ListItem>
+              </Link>
+            );
+          }
+        )}
       </List>
     </div>
   );

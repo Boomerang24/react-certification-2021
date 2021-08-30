@@ -18,7 +18,7 @@ export const NavBar = () => {
 
   const history = useHistory();
 
-  const handleInputeChange = (e) => {
+  const handleInputChange = (e) => {
     setInputvalue(e.target.value);
   };
 
@@ -37,7 +37,7 @@ export const NavBar = () => {
             type="text"
             placeholder="Enter your video name"
             value={inputValue}
-            onChange={handleInputeChange}
+            onChange={handleInputChange}
             data-testid="search-field"
           />
         </form>

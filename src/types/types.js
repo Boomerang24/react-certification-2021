@@ -4,4 +4,5 @@ export const types = {
   modifyVideos: "Manage Favorite Videos",
   modifyLocalStorage: "Modified stored videos",
   saveThemeStorage: "Saves the current theme",
+  saveUser: "Saves user in localStorage",
 };
