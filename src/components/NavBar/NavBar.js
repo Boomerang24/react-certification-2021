@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { StyledSwitch } from "../Switch/Switch.styles";
 import {
   Container,
-  HomeButton,
   Nav,
   SearchBar,
   SearchButton,

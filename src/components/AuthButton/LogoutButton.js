@@ -4,7 +4,6 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { StyledButton } from "../NavBar/NavBar.styles";
 import { VideosContext } from "../providers/VideosProvider";
 import { types } from "../../types/types";
-import { Tooltip } from "@material-ui/core";
 
 const LogoutButton = () => {
   const { logout } = useAuth0();

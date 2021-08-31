@@ -23,9 +23,9 @@ export const GridItem = ({ title, thumbnail, channelTitle, videoID }) => {
   const handleFav = () => {
     dispatch({ type: types.modifyVideos, payload: currentVideo });
     dispatch({ type: types.modifyLocalStorage });
-    // toast("Fav. Videos Updated", {
-    //   id: "fav",
-    // });
+    toast("Fav. Videos Updated", {
+      id: "fav",
+    });
   };
 
   return (
