@@ -10,7 +10,6 @@ function Favoritos() {
   return (
     <>
       <StyledTitle>Welcome to "Favoritos"</StyledTitle>
-
       <Grid />
     </>
   );

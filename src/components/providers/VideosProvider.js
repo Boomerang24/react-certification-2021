@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React, { createContext, useReducer, useState } from "react";
 // import {data} from '../../mock/mockedUTube'
 import { reducer } from "../../helpers/reducer";
@@ -22,10 +23,13 @@ export function VideosProvider({ children }) {
   });
 
   const [busqueda, setBusqueda] = useState("Wizeline");
+  const { isAuthenticated } = useAuth0();
+
+  const loggedIn = isAuthenticated || credentials.authMock;
 
   return (
     <VideosContext.Provider
-      value={{ busqueda, setBusqueda, globalState, dispatch }}
+      value={{ busqueda, setBusqueda, globalState, dispatch, loggedIn }}
     >
       {children}
     </VideosContext.Provider>

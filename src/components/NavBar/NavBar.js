@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { StyledSwitch } from "../Switch/Switch.styles";
 import {
   Container,
+  HomeButton,
   Nav,
   SearchBar,
   SearchButton,
@@ -48,7 +49,7 @@ export const NavBar = () => {
       </SearchNav>
       <Container>
         <StyledSwitch />
-        <AuthenticationButton></AuthenticationButton>
+        <AuthenticationButton />
       </Container>
     </Nav>
   );

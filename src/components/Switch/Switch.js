@@ -5,9 +5,10 @@ import { types } from "../../types/types";
 import { lightTheme, darkTheme } from "../../ThemeStyles";
 import { BsSun } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
+import { Tooltip } from "@material-ui/core";
 
 export default function Switches() {
-  const { globalState, dispatch } = useContext(VideosContext);
+  const { globalState, dispatch, loggedIn } = useContext(VideosContext);
 
   const initialTheme = globalState.theme.id === "darkTheme";
   const [switchValue, setSwitchValue] = useState(initialTheme);
@@ -18,19 +19,21 @@ export default function Switches() {
       type: types.theme,
       payload: e.target.checked ? darkTheme : lightTheme,
     });
-    dispatch({ type: types.saveThemeStorage });
+    loggedIn && dispatch({ type: types.saveThemeStorage });
   };
 
   return (
-    <Switch
-      onClick={handleSwitchChange}
-      color="default"
-      checked={switchValue}
-      icon={<BsSun />}
-      checkedIcon={<FaMoon />}
-      className="darkmode-switch"
-      name="lightTheme"
-      data-testid="dark-mode-switch"
-    />
+    <Tooltip title="Theme">
+      <Switch
+        onClick={handleSwitchChange}
+        color="default"
+        checked={switchValue}
+        icon={<BsSun />}
+        checkedIcon={<FaMoon />}
+        className="darkmode-switch"
+        name="lightTheme"
+        data-testid="dark-mode-switch"
+      />
+    </Tooltip>
   );
 }

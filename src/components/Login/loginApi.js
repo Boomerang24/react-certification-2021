@@ -8,7 +8,7 @@ export default async function loginApi(username, password) {
           authMock: "true",
         });
       }
-      return reject(new Error("Username or password invalid"));
+      return reject("Username or password invalid");
     }, 500);
   });
 }

@@ -1,36 +1,38 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React, { useContext } from "react";
-import { MdFavoriteBorder } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { types } from "../../types/types";
 import { GridItem } from "../Grid/GridItem";
 import { useFetchRelated } from "../hooks/useFetchRelated";
 import { useVideoInfo } from "../hooks/useVideoInfo";
-import { StyledFav } from "../NavBar/NavBar.styles";
 import { VideosContext } from "../providers/VideosProvider";
 import {
+  StyledDescription,
   StyledPlayer,
   StyledPlayerGrid,
   StyledRelatedVideos,
   StyledVideo,
   StyledVideoInfo,
 } from "./PlayerGrid.styles";
+import toast from "react-hot-toast";
+import FavoriteBtn from "../FavoriteBtn/FavoriteBtn";
 
 export const PlayerGrid = () => {
   const { videoID } = useParams();
 
-  const { isAuthenticated } = useAuth0();
-
   const relatedVideos = useFetchRelated(videoID);
   const { publishedAt, title, thumbnail, channelTitle, description } =
     useVideoInfo(videoID);
-  const { dispatch } = useContext(VideosContext);
+  const { dispatch, loggedIn } = useContext(VideosContext);
 
   const currentVideo = { publishedAt, title, thumbnail, channelTitle, videoID };
 
   const handleFav = () => {
+    console.log("PlayerGrid");
     dispatch({ type: types.modifyVideos, payload: currentVideo });
     dispatch({ type: types.modifyLocalStorage });
+    toast("Fav. Videos Updated", {
+      id: "fav",
+    });
   };
 
   return (
@@ -43,14 +45,12 @@ export const PlayerGrid = () => {
           title="YouTube video player"
         />
         <StyledVideoInfo key={videoID}>
-          {isAuthenticated && (
-            <StyledFav onClick={handleFav}>
-              <MdFavoriteBorder />
-            </StyledFav>
+          {loggedIn && (
+            <FavoriteBtn handleFav={handleFav} currentVideo={currentVideo} />
           )}
           <h1>{title}</h1>
           <h4>{channelTitle}</h4>
-          <h6>{description}</h6>
+          <StyledDescription>{description}</StyledDescription>
         </StyledVideoInfo>
       </StyledPlayer>
       <StyledRelatedVideos>

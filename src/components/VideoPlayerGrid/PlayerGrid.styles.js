@@ -43,6 +43,14 @@ export const StyledVideoInfo = styled.div`
   color: ${(props) => props.theme.fontcolor};
 `;
 
+export const StyledDescription = styled.h6`
+  @media screen and (max-width: 820px) {
+    overflow: scroll;
+    max-width: 99%;
+    max-height: 15rem;
+  }
+`;
+
 export const StyledRelatedVideos = styled.div`
   display: flex;
   flex-direction: column;

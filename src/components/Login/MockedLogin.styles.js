@@ -24,3 +24,7 @@ export const StyledOverLay = styled.div`
 export const textFieldFormat = {
   marginBottom: "10px",
 };
+
+export const btnFormat = {
+  marginBottom: "1rem",
+};

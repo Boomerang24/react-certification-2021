@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import MockedLogin from "../Login/MockedLogin";
 
 export default function LogonBtn() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const [openLogon, setOpenLogon] = useState(false);
 
@@ -22,7 +22,7 @@ export default function LogonBtn() {
   const { loginWithPopup } = useAuth0();
 
   return (
-    <div>
+    <div data-testid="login-button">
       <StyledButton
         aria-controls="simple-menu"
         aria-haspopup="true"

@@ -7,19 +7,18 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-import { Menu } from "../NavBar/NavBar.styles";
+import { Home, Menu } from "../NavBar/NavBar.styles";
 import { Link } from "react-router-dom";
 import { VideosContext } from "../providers/VideosProvider";
-import { useAuth0 } from "@auth0/auth0-react";
 import { filterRoutes } from "./sidebarData";
+import { Tooltip } from "@material-ui/core";
 
 const anchor = "left";
 
 export default function SideMenu() {
-  const { isAuthenticated } = useAuth0();
-
   const {
-    globalState: { theme, credentials },
+    globalState: { theme },
+    loggedIn,
   } = useContext(VideosContext);
 
   const useStyles = makeStyles({
@@ -59,41 +58,46 @@ export default function SideMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {filterRoutes(isAuthenticated || credentials.authMock).map(
-          (item, index) => {
-            return (
-              <Link to={item.path} key={index}>
-                <ListItem button key={index} style={{ color: theme.fontcolor }}>
-                  <ListItemIcon style={{ color: theme.fontcolor }}>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.title} />
-                </ListItem>
-              </Link>
-            );
-          }
-        )}
+        {filterRoutes(loggedIn).map((item, index) => {
+          return (
+            <Link to={item.path} key={index}>
+              <ListItem button key={index} style={{ color: theme.fontcolor }}>
+                <ListItemIcon style={{ color: theme.fontcolor }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItem>
+            </Link>
+          );
+        })}
       </List>
     </div>
   );
 
   return (
-    <div>
-      {
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
-            <Menu />
-          </Button>
-          <Drawer
-            classes={{ paper: classes.paper }}
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      }
-    </div>
+    <>
+      <div>
+        {
+          <React.Fragment key={anchor}>
+            <Tooltip title="Menu">
+              <Button onClick={toggleDrawer(anchor, true)}>
+                <Menu />
+              </Button>
+            </Tooltip>
+            <Drawer
+              classes={{ paper: classes.paper }}
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </React.Fragment>
+        }
+      </div>
+      <Link to="/">
+        <Home />
+      </Link>
+    </>
   );
 }

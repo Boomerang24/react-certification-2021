@@ -1,18 +1,19 @@
 import { Button, Grid, TextField } from "@material-ui/core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ReactDom from "react-dom";
 import { types } from "../../types/types";
 import useForm from "../hooks/useForm";
 import { VideosContext } from "../providers/VideosProvider";
 import loginApi from "./loginApi";
 import {
+  btnFormat,
   StyledModal,
   StyledOverLay,
   textFieldFormat,
 } from "./MockedLogin.styles";
 
 const MockedLogin = ({ open, children, onClose }) => {
-  const [logonInfo, setLogonInfo] = useForm({
+  const [logonInfo, setLogonInfo, reset] = useForm({
     username: "",
     password: "",
     authMock: "false",
@@ -22,16 +23,25 @@ const MockedLogin = ({ open, children, onClose }) => {
 
   const { dispatch } = useContext(VideosContext);
 
+  const [failedLogon, setFailedLogon] = useState("");
+
   const handleLoginApi = (e) => {
     e.preventDefault();
     loginApi(username, password)
       .then((userinfo) => {
         dispatch({ type: types.saveUser, payload: userinfo });
         onClose();
-        //TODO: Check if this could be changed
-        window.location.reload(true);
+        window.location.reload();
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setFailedLogon(error);
+        reset();
+      });
+  };
+
+  const handleCancel = () => {
+    onClose();
+    setFailedLogon("");
   };
 
   if (!open) return null;
@@ -86,23 +96,25 @@ const MockedLogin = ({ open, children, onClose }) => {
               color="primary"
               type="submit"
               className="button-block"
-              style={textFieldFormat}
+              style={btnFormat}
               menulistprops={{
                 disablePadding: true,
               }}
               onClick={handleLoginApi}
             >
-              Logon
+              Login
             </Button>
             <Button
               variant="contained"
               color="primary"
               type="submit"
               className="button-block"
-              onClick={onClose}
+              onClick={handleCancel}
+              style={btnFormat}
             >
               Cancel
             </Button>
+            <p>{failedLogon}</p>
           </Grid>
         </form>
         {children}
