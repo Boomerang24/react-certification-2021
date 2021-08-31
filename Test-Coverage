@@ -1,0 +1,71 @@
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |   55.37 |    32.76 |   43.96 |   55.15 |                   
+ src                             |   26.67 |        0 |       0 |   26.67 |                   
+  App.js                         |       0 |      100 |       0 |       0 | 10                
+  ThemeStyles.js                 |     100 |      100 |     100 |     100 |                   
+  envVariables.js                |     100 |      100 |     100 |     100 |                   
+  index.js                       |       0 |      100 |     100 |       0 | 9-18              
+  reportWebVitals.js             |       0 |        0 |       0 |       0 | 1-8
+ src/auth                        |       0 |      100 |       0 |       0 | 
+  auth0-provider-with-history.js |       0 |      100 |       0 |       0 | 4-9
+ src/components/AuthButton       |      60 |      100 |   46.15 |      60 | 
+  AuthenticationButton.js        |     100 |      100 |     100 |     100 | 
+  LoginButton.js                 |       0 |      100 |       0 |       0 | 6-13
+  LogonBtn.js                    |   84.62 |      100 |   66.67 |   84.62 | 15,64
+  LogoutButton.js                |   66.67 |      100 |      50 |   66.67 | 17-21
+  SignupButton.js                |       0 |      100 |       0 |       0 | 4-10
+ src/components/FavoriteBtn      |    62.5 |       50 |   33.33 |    62.5 | 
+  FavoriteBtn.js                 |    62.5 |       50 |   33.33 |    62.5 | 16-19
+ src/components/Grid             |   74.29 |      100 |   69.23 |   74.29 | 
+  Favoritos.js                   |     100 |      100 |     100 |     100 | 
+  Grid.js                        |     100 |      100 |     100 |     100 | 
+  Grid.styles.js                 |      75 |      100 |      50 |      75 | 15
+  GridItem.js                    |   66.67 |      100 |      50 |   66.67 | 24-26
+  GridItem.styles.js             |     100 |      100 |     100 |     100 | 
+  MainContainer.js               |       0 |      100 |       0 |       0 | 5-16
+ src/components/Login            |   61.11 |    33.33 |      30 |   58.82 | 
+  MockedLogin.js                 |   66.67 |      100 |   42.86 |      64 | 41-50,55-56      
+  MockedLogin.styles.js          |     100 |      100 |     100 |     100 | 
+  loginApi.js                    |       0 |        0 |       0 |       0 | 2-11
+ src/components/NavBar           |   80.95 |      100 |      50 |   80.95 | 
+  NavBar.js                      |   63.64 |      100 |   33.33 |   63.64 | 22,26-28
+  NavBar.styles.js               |     100 |      100 |     100 |     100 | 
+ src/components/Sidebar          |      85 |    28.57 |   85.71 |   83.33 | 
+  SideMenu.js                    |   78.57 |        0 |      80 |   76.92 | 42-49
+  sidebarData.js                 |     100 |      100 |     100 |     100 | 
+ src/components/Switch           |   66.67 |        0 |      50 |   66.67 | 
+  Switch.js                      |    62.5 |        0 |      50 |    62.5 | 17-22
+  Switch.styles.js               |     100 |      100 |     100 |     100 | 
+ src/components/VideoPlayerGrid  |   78.26 |       50 |   71.43 |   78.26 | 
+  PlayerGrid.js                  |   61.54 |       50 |   33.33 |   61.54 | 30-33,59
+  PlayerGrid.styles.js           |     100 |      100 |     100 |     100 | 
+ src/components/hooks            |   57.14 |       20 |   41.67 |   57.14 | 
+  useFetchRelated.js             |   81.82 |       50 |   66.67 |   81.82 | 18-19
+  useFetchVideos.js              |    9.09 |        0 |       0 |    9.09 | 7-24
+  useForm.js                     |   71.43 |        0 |   33.33 |   71.43 | 7,14
+  useVideoInfo.js                |   83.33 |      100 |   66.67 |   83.33 | 12
+ src/components/providers        |   47.06 |       75 |      25 |   47.06 | 
+  VideosProvider.js              |   44.44 |       75 |       0 |   44.44 | 19-30
+  storage.js                     |      50 |      100 |   33.33 |      50 | 7-17              
+ src/components/routes           |       0 |        0 |       0 |       0 | 
+  PrivateRoutes.js               |       0 |        0 |       0 |       0 | 8-14
+  Routes.js                      |       0 |        0 |       0 |       0 | 11-18
+ src/helpers                     |   14.29 |        0 |      10 |      15 | 
+  getRelatedVideos.js            |   11.11 |      100 |       0 |    12.5 | 5-23
+  getVideoInfo.js                |    37.5 |      100 |      50 |   42.86 | 6-19
+  getVideos.js                   |   14.29 |      100 |       0 |   14.29 | 6-21
+  reducer.js                     |    5.56 |        0 |       0 |    5.56 | 5-37
+ src/mock                        |   66.67 |      100 |     100 |   66.67 |
+  mockedData.js                  |       0 |      100 |     100 |       0 | 1
+  mockedUTube.js                 |     100 |      100 |     100 |     100 |
+  testMock.js                    |     100 |      100 |     100 |     100 |
+ src/types                       |     100 |      100 |     100 |     100 |
+  types.js                       |     100 |      100 |     100 |     100 |
+---------------------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 2 failed, 7 passed, 9 total
+Tests:       2 failed, 15 passed, 17 total
+Snapshots:   0 total
+Time:        6.67 s

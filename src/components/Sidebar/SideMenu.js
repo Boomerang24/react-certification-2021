@@ -76,7 +76,7 @@ export default function SideMenu() {
 
   return (
     <>
-      <div>
+      <div data-testid="navbar-menu">
         {
           <React.Fragment key={anchor}>
             <Tooltip title="Menu">

@@ -39,6 +39,7 @@ export default function LogonBtn() {
       >
         <MenuItem
           id="Auth0"
+          data-testid="Auth0"
           onClick={() => {
             handleClose();
             loginWithPopup();
@@ -48,6 +49,7 @@ export default function LogonBtn() {
         </MenuItem>
         <MenuItem
           id="Wizeline"
+          data-testid="Wizeline"
           onClick={() => {
             handleClose();
             setOpenLogon(true);
