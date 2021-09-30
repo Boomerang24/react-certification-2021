@@ -1,19 +1,20 @@
 import React, { useContext } from "react";
-import { MdFavoriteBorder } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { types } from "../../types/types";
 import { GridItem } from "../Grid/GridItem";
 import { useFetchRelated } from "../hooks/useFetchRelated";
 import { useVideoInfo } from "../hooks/useVideoInfo";
-import { StyledFav } from "../NavBar/NavBar.styles";
 import { VideosContext } from "../providers/VideosProvider";
 import {
+  StyledDescription,
   StyledPlayer,
   StyledPlayerGrid,
   StyledRelatedVideos,
   StyledVideo,
   StyledVideoInfo,
 } from "./PlayerGrid.styles";
+import toast from "react-hot-toast";
+import FavoriteBtn from "../FavoriteBtn/FavoriteBtn";
 
 export const PlayerGrid = () => {
   const { videoID } = useParams();
@@ -21,29 +22,35 @@ export const PlayerGrid = () => {
   const relatedVideos = useFetchRelated(videoID);
   const { publishedAt, title, thumbnail, channelTitle, description } =
     useVideoInfo(videoID);
-  const { globalState, dispatch } = useContext(VideosContext);
+  const { dispatch, loggedIn } = useContext(VideosContext);
 
   const currentVideo = { publishedAt, title, thumbnail, channelTitle, videoID };
 
   const handleFav = () => {
+    console.log("PlayerGrid");
     dispatch({ type: types.modifyVideos, payload: currentVideo });
+    dispatch({ type: types.modifyLocalStorage });
+    toast("Fav. Videos Updated", {
+      id: "fav",
+    });
   };
 
   return (
-    <StyledPlayerGrid theme={globalState.theme}>
-      <StyledPlayer theme={globalState.theme}>
+    <StyledPlayerGrid>
+      <StyledPlayer>
         <StyledVideo
+          allowFullScreen={true}
           role="iframe"
           src={`https://www.youtube.com/embed/${videoID}`}
           title="YouTube video player"
-        ></StyledVideo>
-        <StyledVideoInfo theme={globalState.theme} key={videoID}>
-          <StyledFav onClick={handleFav}>
-            <MdFavoriteBorder />
-          </StyledFav>
+        />
+        <StyledVideoInfo key={videoID}>
+          {loggedIn && (
+            <FavoriteBtn handleFav={handleFav} currentVideo={currentVideo} />
+          )}
           <h1>{title}</h1>
           <h4>{channelTitle}</h4>
-          <h6>{description}</h6>
+          <StyledDescription>{description}</StyledDescription>
         </StyledVideoInfo>
       </StyledPlayer>
       <StyledRelatedVideos>

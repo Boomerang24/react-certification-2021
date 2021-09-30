@@ -9,7 +9,9 @@ export const useFetchRelated = (videoID) => {
 
   const [relatedvid, setRelatedVid] = useState([]);
 
-  const { favVideos } = useContext(VideosContext).globalState;
+  const {
+    globalState: { favVideos },
+  } = useContext(VideosContext);
 
   useEffect(() => {
     if (parentRoute === "video") {

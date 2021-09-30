@@ -1,12 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Grid } from "@material-ui/core";
 import { fireEvent, render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { NavBar } from "../../../components/NavBar/NavBar";
-import { VideosProvider } from "../../../components/providers/VideosProvider";
-
-jest.mock("../../../components/AuthButton/authentication-button", () => () => (
-  <button data-testid="logout-button"></button>
-));
+import { VideosContext } from "../../../components/providers/VideosProvider";
 
 // jest.mock("../../../components/AuthButton/authentication-button", () => ({
 //   AuthenticationButton: jest.fn(),
@@ -15,9 +12,17 @@ jest.mock("../../../components/AuthButton/authentication-button", () => () => (
 describe("Test for Navbar", () => {
   beforeEach(() => {
     render(
-      <VideosProvider>
-        <NavBar />
-      </VideosProvider>
+      <VideosContext.Provider
+        value={{
+          loggedIn: false,
+          globalState: { theme: {} },
+          setBusqueda: jest.fn(),
+        }}
+      >
+        <MemoryRouter>
+          <NavBar />
+        </MemoryRouter>
+      </VideosContext.Provider>
     );
   });
 
@@ -44,9 +49,25 @@ describe("Test for Navbar", () => {
     expect(screen.getByTestId("dark-mode-switch")).toBeInTheDocument();
   });
 
-  test("logon button is displayed", () => {
-    // AuthenticationButton.mockImplementation()
-    // expect(screen.getByTestId("logon-button")).toBeInTheDocument();
+  test("logn button is displayed", () => {
+    expect(screen.getByTestId("login-button")).toBeInTheDocument();
+  });
+
+  test("logout button is displayed", () => {
+    render(
+      <VideosContext.Provider
+        value={{
+          loggedIn: true,
+          globalState: { theme: {} },
+          setBusqueda: jest.fn(),
+        }}
+      >
+        <MemoryRouter>
+          <NavBar />
+        </MemoryRouter>
+      </VideosContext.Provider>
+    );
+
     expect(screen.getByTestId("logout-button")).toBeInTheDocument();
   });
 });

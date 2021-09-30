@@ -1,12 +1,17 @@
 import React from "react";
+import styled from "styled-components";
 import { Grid } from "./Grid";
+
+const StyledTitle = styled.h1`
+  color: ${(props) => props.theme.fontcolor};
+`;
 
 function Favoritos() {
   return (
-    <div>
-      <h1>Welcome to "Favoritos"</h1>
+    <>
+      <StyledTitle>Welcome to "Favoritos"</StyledTitle>
       <Grid />
-    </div>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import { RiSearchLine } from "react-icons/ri";
+import { AiFillHome } from "react-icons/ai";
 
 export const Nav = styled.nav`
   background: #333333;
@@ -8,7 +9,6 @@ export const Nav = styled.nav`
   box-shadow: 0px 2px red;
   height: 55px;
   display: flex;
-  padding: 0.1rem;
   width: 100%;
   z-index: 10;
   justify-content: space-between;
@@ -35,6 +35,19 @@ export const Menu = styled(FaBars)`
   /* @media screen and (prefers-reduced-motion: no-preference) {
       animation: App-logo-spin infinite 7s linear;
     } */
+`;
+
+export const Home = styled(AiFillHome)`
+  position: absolute;
+  cursor: pointer;
+  left: 70px;
+  top: 10px;
+  max-width: 5rem;
+  font-size: 2rem;
+  color: white;
+  @media screen and (max-width: 610px) {
+    display: none;
+  }
 `;
 
 export const SearchNav = styled.div`
@@ -76,6 +89,7 @@ export const SearchButton = styled(RiSearchLine)`
   border-radius: 37px;
   border-style: hidden;
   background: #256ce1;
+  /* background: ${(props) => props.theme.background}; */
   color: whitesmoke;
   cursor: pointer;
   font-size: 1.2rem;
@@ -124,17 +138,31 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-right: 0.7rem;
+
+  @media screen and (max-width: 560px) {
+    .darkmode-switch {
+      display: none;
+    }
+  }
+`;
+
 export const StyledFav = styled.button`
   border: none;
   border-radius: 55px;
   border-style: hidden;
-  background: grey;
+  background: red;
   color: #010606;
   cursor: pointer;
   display: flex;
   font-size: 1.6rem;
   margin: auto;
   outline: none;
+  margin-top: 3px;
   padding: 1px 13px;
   position: absolute;
   /* right: 375px;
